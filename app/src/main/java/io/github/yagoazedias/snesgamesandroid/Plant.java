@@ -1,14 +1,13 @@
 package io.github.yagoazedias.snesgamesandroid;
 
+
 import android.graphics.Paint;
 
-public class Water {
-
+public class Plant {
     int x = 0;
     int y = 0;
-
-    int width  = x + 984;
-    int height = y + 636;
+    int height = 139;
+    int width  = 139;
 
     Paint paint = new Paint();
 }

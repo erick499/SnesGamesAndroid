@@ -7,17 +7,45 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class CustomView extends View implements Runnable{
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class CustomView extends View implements Runnable {
 
     public Flog flog   = new Flog();
     public Water water = new Water();
     public Handler handler = new Handler();
-
+    public List<Plant> plants;
     public int[] waterObjPos = {0, 159, 318, 477};
+
+    public void OnStart(){
+        InitFlog();
+        InitSurfaces();
+    }
+
+    public CustomView(Context context) {
+        super(context);
+    }
+
+    public CustomView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public CustomView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
+
+    public void InitSurfaces(){
+        plants[0].x = 0;
+        plants[0].y = waterObjPos[0];
+    }
 
     public void InitFlog() {
         flog.x = 450;
@@ -57,19 +85,6 @@ public class CustomView extends View implements Runnable{
         }
     }
 
-    public CustomView(Context context) {
-        super(context);
-        InitFlog();
-    }
-
-    public CustomView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public CustomView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
     public boolean onTouchEvent(MotionEvent event) {
         UpdateFlogProprietes();
         UpdateWaterProprietes();
@@ -97,8 +112,10 @@ public class CustomView extends View implements Runnable{
         super.onDraw(canvas);
         flog.paint.setColor(Color.GREEN);
         water.paint.setColor(Color.BLUE);
+        plants[0].paint.setColor(Color.GREEN);
 
         canvas.drawRect(water.x, water.y, water.width, water.height, water.paint);
+        canvas.drawRect(plants[0].x, plants[0].y, plants[0].width, plants[0].height, plants[0].paint);
         canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
 
         Update();
