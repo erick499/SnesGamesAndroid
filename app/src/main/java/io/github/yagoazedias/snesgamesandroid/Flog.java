@@ -16,10 +16,10 @@ public class Flog {
     MainActivity main = new MainActivity();
 
     int x = 450;
-    int y = 500;
+    int y = 1500;
 
     int width  = x + 100;
-    int height = y + 50;
+    int height = y + 100;
 
     Paint paint = new Paint();
 

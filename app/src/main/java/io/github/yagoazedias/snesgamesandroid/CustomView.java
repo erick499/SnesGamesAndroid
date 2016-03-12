@@ -3,6 +3,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -15,9 +17,22 @@ public class CustomView extends View implements Runnable{
 
     Handler handler = new Handler();
 
+    public void InitFlog() {
+        flog.x = 450;
+        flog.y = getHeight() - 50;
+
+        flog.width  = flog.x + 100;
+        flog.height = flog.y + 50;
+    }
+
+    public void UpdateFlogPropites() {
+        flog.width  = flog.x + 100;
+        flog.height = flog.y + 50;
+    }
 
     public CustomView(Context context) {
         super(context);
+        InitFlog();
     }
 
     public CustomView(Context context, AttributeSet attrs) {
@@ -31,12 +46,15 @@ public class CustomView extends View implements Runnable{
     public boolean onTouchEvent(MotionEvent event)
     {
         flog.y -= 100;
+        UpdateFlogPropites();
         return false;
     }
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         flog.paint.setColor(Color.GREEN);
+
         canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
 
         Update();
@@ -49,7 +67,7 @@ public class CustomView extends View implements Runnable{
     }
 
     private void Update() {
-
+        UpdateFlogPropites();
     }
 
     @Override
