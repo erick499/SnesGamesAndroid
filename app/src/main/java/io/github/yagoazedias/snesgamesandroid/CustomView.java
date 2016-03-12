@@ -8,24 +8,30 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 public class CustomView extends View implements Runnable{
 
-    public Flog flog = new Flog();
+    public Flog flog   = new Flog();
+    public Water water = new Water();
     public Handler handler = new Handler();
 
-    public void InitFlog() {
-        flog.x = getMeasuredWidth() / 2;
-        flog.y = getMeasuredHeight() - 50;
+    public int[] waterObjPos = {0, 159, 318, 477};
 
-        System.out.println(getMeasuredHeight());
+    public void InitFlog() {
+        flog.x = 450;
+        flog.y = getMeasuredHeight() - ((getMeasuredHeight() / 11) / 2);
+
+        System.out.println(getMeasuredWidth());
 
         flog.width  = flog.x + 100;
         flog.height = flog.y + 50;
+    }
+
+    public void UpdateWaterProprietes(){
+        water.width = water.x + getMeasuredWidth();
+        water.height = water.y + 636;
     }
 
     public void UpdateFlogProprietes() {
@@ -66,6 +72,7 @@ public class CustomView extends View implements Runnable{
 
     public boolean onTouchEvent(MotionEvent event) {
         UpdateFlogProprietes();
+        UpdateWaterProprietes();
 
         int x = (int) event.getX();
         int y = (int) event.getY();
@@ -82,7 +89,6 @@ public class CustomView extends View implements Runnable{
             Move("up");
         }
 
-
         invalidate();
         return super.onTouchEvent(event);
     }
@@ -90,7 +96,9 @@ public class CustomView extends View implements Runnable{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         flog.paint.setColor(Color.GREEN);
+        water.paint.setColor(Color.BLUE);
 
+        canvas.drawRect(water.x, water.y, water.width, water.height, water.paint);
         canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
 
         Update();
@@ -104,6 +112,7 @@ public class CustomView extends View implements Runnable{
 
     private void Update() {
         UpdateFlogProprietes();
+        System.out.println(getMeasuredWidth());
     }
 
     @Override
