@@ -4,19 +4,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class CustomView extends View implements Runnable{
 
-    final Paint flog  = new Paint();
-    final Paint border = new Paint();
-    final int height = 100;
-    final int width  = 100;
+    public Flog flog = new Flog();
+
+    Handler handler = new Handler();
+
 
     public CustomView(Context context) {
         super(context);
-
     }
 
     public CustomView(Context context, AttributeSet attrs) {
@@ -27,23 +28,32 @@ public class CustomView extends View implements Runnable{
         super(context, attrs, defStyle);
     }
 
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        flog.y -= 100;
+        return false;
+    }
+
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        flog.paint.setColor(Color.GREEN);
+        canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
 
-        int dCenter = 40;
-        int centerX = (int)(getWidth()/2);
-        int centerY = (int)(getHeight()/2);
+        Update();
 
-        Paint paint = new Paint();
-        paint.setColor(Color.BLUE);  //The square will draw in the color blue now
+        try {
+            Thread.sleep(30);
+        } catch (InterruptedException e) { }
 
-        Rect rect = new Rect(0, 0, 100, 200);
-        canvas.drawRect(rect, paint);
+        invalidate();
+    }
+
+    private void Update() {
 
     }
 
     @Override
     public void run() {
-
+        handler.postDelayed(this, 30);
     }
 }
