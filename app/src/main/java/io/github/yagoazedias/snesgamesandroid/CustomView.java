@@ -16,13 +16,15 @@ public class CustomView extends View implements Runnable {
     public Plant[] plants2 = new Plant[3];
     public Tree[]  trees1  = new Tree[2];
     public Tree    tree2   = new Tree();
-    public int[]   LineObjPos = { 20, 169, 318, 477, 646, 815, 1010 };
-    public Car[]   carsLine1 = new Car[3];
-    public Car[]   carsLine2 = new Car[3];
-    public Car[]   carsLine3 = new Car[3];
-    public Car[]   carsLine4 = new Car[3];
-    public Car[]   carsLine5 = new Car[3];
-    public Car[]   carsLine6 = new Car[3];
+    public int[]   LineObjPos = { 20, 169, 318, 477, 646, 815, 1010, 1169, 1328 };
+    public int[]   PlayerPos  =  {-20, 30, 179, 328, 487, 656, 825, 1020, 1179, 1338, 1550 };
+    public Car[]   carsLine1  = new Car[3];
+    public Car[]   carsLine2  = new Car[3];
+    public Car[]   carsLine3  = new Car[3];
+    public Car[]   carsLine4  = new Car[3];
+    public Car[]   carsLine5  = new Car[2];
+
+    public int line = 10;
 
     public void OnStart(){
         InitFlog();
@@ -42,6 +44,31 @@ public class CustomView extends View implements Runnable {
         super(context, attrs, defStyle);
     }
 
+    public void Collision() {
+        for(int j = 0; j < carsLine1.length; j++) {
+            for (int i = 0; i < trees1.length; i++) {
+
+                if((line < 5)) {
+                    if (((flog.x >= tree2.x) && (flog.x <= tree2.x + 429)) && (line == 4)
+                            || ((flog.x >= trees1[0].x) && (flog.x <= trees1[0].x + 429)) && (line == 3)
+                            || ((flog.x >= trees1[1].x) && (flog.x <= trees1[1].x + 429)) && (line == 3)
+                            || ((flog.x >= plants2[0].x) && (flog.x <= plants2[0].x + 139)) && (line == 2)
+                            || ((flog.x >= plants2[1].x) && (flog.x <= plants2[1].x + 139)) && (line == 2)
+                            || ((flog.x >= plants2[2].x) && (flog.x <= plants2[2].x + 139)) && (line == 2)
+                            || ((flog.x >= plants1[0].x) && (flog.x <= plants1[0].x + 139)) && (line == 1)
+                            || ((flog.x >= plants1[1].x) && (flog.x <= plants1[1].x + 139)) && (line == 1)
+                            || ((flog.x >= plants1[2].x) && (flog.x <= plants1[2].x + 139)) && (line == 1)) {
+                        System.out.println("State: " + flog.state + ", in the line: " + line);
+                        flog.state = "Safe";
+                    } else if((line < 5)) {
+                        System.out.println("State: " + flog.state);
+                        flog.state = "InMercer";
+                    }
+                }
+            }
+        }
+    }
+
     public void InitCars() {
         for (int i = 0; i < carsLine1.length; i++) {
             carsLine1[i] = new Car();
@@ -58,12 +85,96 @@ public class CustomView extends View implements Runnable {
                 carsLine1[i].height = carsLine1[i].y + 129;
             }
         }
+
+        for (int i = 0; i < carsLine2.length; i++) {
+            carsLine2[i] = new Car();
+
+            if(i == 0) {
+                carsLine2[i].x = 20;
+                carsLine2[i].y = LineObjPos[5];
+                carsLine2[i].width  = carsLine2[i].x + 229;
+                carsLine2[i].height = carsLine2[i].y + 129;
+            }else{
+                carsLine2[i].x = carsLine2[i - 1].width - 1000;
+                carsLine2[i].y = LineObjPos[5];
+                carsLine2[i].width  = carsLine2[i].x + 229;
+                carsLine2[i].height = carsLine2[i].y + 129;
+            }
+        }
+
+        for (int i = 0; i < carsLine3.length; i++) {
+            carsLine3[i] = new Car();
+
+            if(i == 0) {
+                carsLine3[i].x = 20;
+                carsLine3[i].y = LineObjPos[6];
+                carsLine3[i].width  = carsLine3[i].x + 229;
+                carsLine3[i].height = carsLine3[i].y + 129;
+            }else{
+                carsLine3[i].x = carsLine3[i - 1].width + 400;
+                carsLine3[i].y = LineObjPos[6];
+                carsLine3[i].width  = carsLine3[i].x + 229;
+                carsLine3[i].height = carsLine3[i].y + 129;
+            }
+        }
+
+        for (int i = 0; i < carsLine4.length; i++) {
+            carsLine4[i] = new Car();
+
+            if(i == 0) {
+                carsLine4[i].x = 20;
+                carsLine4[i].y = LineObjPos[7];
+                carsLine4[i].width  = carsLine4[i].x + 229;
+                carsLine4[i].height = carsLine4[i].y + 129;
+            }else{
+                carsLine4[i].x = carsLine3[i - 1].width - 1000;
+                carsLine4[i].y = LineObjPos[7];
+                carsLine4[i].width  = carsLine4[i].x + 229;
+                carsLine4[i].height = carsLine4[i].y + 129;
+            }
+        }
+
+        for (int i = 0; i < carsLine5.length; i++) {
+            carsLine5[i] = new Car();
+
+            if(i == 0) {
+                carsLine5[i].x = 20;
+                carsLine5[i].y = LineObjPos[8];
+                carsLine5[i].width  = carsLine5[i].x + 229;
+                carsLine5[i].height = carsLine5[i].y + 129;
+            }else{
+                carsLine5[i].x = carsLine5[i - 1].width + 400;
+                carsLine5[i].y = LineObjPos[8];
+                carsLine5[i].width  = carsLine5[i].x + 229;
+                carsLine5[i].height = carsLine5[i].y + 129;
+            }
+        }
     }
 
     public void UpdateCarsLength() {
         for (int i = 0; i < carsLine1.length; i++) {
-                carsLine1[i].width  = carsLine1[i].x + 229;
-                carsLine1[i].height = carsLine1[i].y + 129;
+            carsLine1[i].width  = carsLine1[i].x + 229;
+            carsLine1[i].height = carsLine1[i].y + 129;
+        }
+
+        for (int i = 0; i < carsLine2.length; i++) {
+            carsLine2[i].width  = carsLine2[i].x + 229;
+            carsLine2[i].height = carsLine2[i].y + 129;
+        }
+
+        for (int i = 0; i < carsLine3.length; i++) {
+            carsLine3[i].width  = carsLine3[i].x + 229;
+            carsLine3[i].height = carsLine3[i].y + 129;
+        }
+
+        for (int i = 0; i < carsLine4.length; i++) {
+            carsLine4[i].width  = carsLine4[i].x + 229;
+            carsLine4[i].height = carsLine4[i].y + 129;
+        }
+
+        for (int i = 0; i < carsLine5.length; i++) {
+            carsLine5[i].width  = carsLine5[i].x + 229;
+            carsLine5[i].height = carsLine5[i].y + 129;
         }
     }
 
@@ -73,6 +184,39 @@ public class CustomView extends View implements Runnable {
 
             if(carsLine1[i].x < -229){
                 carsLine1[i].x = getMeasuredWidth();
+                UpdateCarsLength();
+            }
+        }
+        for (int i = 0; i < carsLine2.length; i++) {
+            carsLine2[i].x += 5;
+
+            if(carsLine2[i].x > getMeasuredWidth()){
+                carsLine2[i].x = -629;
+                UpdateCarsLength();
+            }
+        }
+        for (int i = 0; i < carsLine3.length; i++) {
+            carsLine3[i].x -= 5;
+
+            if(carsLine3[i].x < -229){
+                carsLine3[i].x = getMeasuredWidth();
+                UpdateCarsLength();
+            }
+        }
+        for (int i = 0; i < carsLine4.length; i++) {
+            carsLine4[i].x += 4;
+
+            if(carsLine4[i].x > getMeasuredWidth()){
+                carsLine4[i].x = -629;
+                UpdateCarsLength();
+            }
+        }
+        for (int i = 0; i < carsLine5.length; i++) {
+            carsLine5[i].x -= 5;
+
+            if(carsLine5[i].x < -229){
+                carsLine5[i].x = getMeasuredWidth();
+                UpdateCarsLength();
             }
         }
     }
@@ -178,9 +322,11 @@ public class CustomView extends View implements Runnable {
 
     public void InitFlog() {
         //flog.x = 450;
-        flog.y = 1749 - ((1749 / 11) / 2);
-          flog.width  = flog.x + 100;
-        flog.height = flog.y + 50;
+        line = 10;
+        flog.y = PlayerPos[line];
+
+        flog.width  = flog.x + 100;
+        flog.height = flog.y + 100;
     }
 
     public void UpdateWaterProprietes(){
@@ -190,11 +336,34 @@ public class CustomView extends View implements Runnable {
 
     public void UpdateFlogProprietes() {
         flog.width  = flog.x + 100;
-        flog.height = flog.y + 50;
+        flog.height = flog.y + 100;
+
+        flog.y  = PlayerPos[line];
 
         if(flog.y < 0) {
             InitFlog();
         }
+
+        if(flog.state.equals("Safe")) {
+            switch (line) {
+                case 4:
+                    flog.x += 10;
+                    break;
+                case 3:
+                    flog.x -= 5;
+                    break;
+                case 2:
+                    flog.x += 5;
+                    break;
+                case 1:
+                    flog.x -= 5;
+                    break;
+            }
+        }
+        else if(flog.state.equals("InMercer")) {
+            InitFlog();
+        }
+
     }
 
     public void UpdatePlants() {
@@ -238,13 +407,13 @@ public class CustomView extends View implements Runnable {
     public void Move(String path){
 
         if(path.equals("left")){
-            flog.x -= getMeasuredWidth() / 5;
+            flog.x -= getMeasuredWidth() / 11;
         }
         if(path.equals("right")){
-            flog.x += getMeasuredWidth() / 5;
+            flog.x += getMeasuredWidth() / 11;
         }
         if(path.equals("up")){
-            flog.y -= getMeasuredHeight() / 11;
+            line --;
         }
     }
 
@@ -287,6 +456,13 @@ public class CustomView extends View implements Runnable {
         }
         for(int i = 0; i < carsLine1.length; i++){
             carsLine1[i].paint.setColor(Color.CYAN);
+            carsLine2[i].paint.setColor(Color.CYAN);
+            carsLine3[i].paint.setColor(Color.CYAN);
+            carsLine4[i].paint.setColor(Color.CYAN);
+        }
+
+        for(int i = 0; i < carsLine5.length; i++) {
+            carsLine5[i].paint.setColor(Color.CYAN);
         }
 
             canvas.drawRect(water.x, water.y, water.width, water.height, water.paint);
@@ -305,6 +481,13 @@ public class CustomView extends View implements Runnable {
 
         for(int i = 0; i < carsLine1.length; i++){
             canvas.drawRect(carsLine1[i].x, carsLine1[i].y, carsLine1[i].width, carsLine1[i].height, carsLine1[i].paint);
+            canvas.drawRect(carsLine2[i].x, carsLine2[i].y, carsLine2[i].width, carsLine2[i].height, carsLine2[i].paint);
+            canvas.drawRect(carsLine3[i].x, carsLine3[i].y, carsLine3[i].width, carsLine3[i].height, carsLine3[i].paint);
+            canvas.drawRect(carsLine4[i].x, carsLine4[i].y, carsLine4[i].width, carsLine4[i].height, carsLine4[i].paint);
+        }
+
+        for(int i = 0; i < carsLine5.length; i++) {
+            canvas.drawRect(carsLine5[i].x, carsLine5[i].y, carsLine5[i].width, carsLine5[i].height, carsLine5[i].paint);
         }
 
         canvas.drawRect(tree2.x, tree2.y, tree2.width, tree2.height, tree2.paint);
@@ -326,6 +509,7 @@ public class CustomView extends View implements Runnable {
         UpdateSurfacesLengths();
         UpdateCarsLength();
         UpdateCars();
+        Collision();
     }
 
     @Override
