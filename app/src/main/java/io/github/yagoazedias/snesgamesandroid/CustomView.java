@@ -2,29 +2,21 @@ package io.github.yagoazedias.snesgamesandroid;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-
 public class CustomView extends View implements Runnable {
 
-    public Flog flog   = new Flog();
-    public Water water = new Water();
+    public Flog    flog    = new Flog();
+    public Water   water   = new Water();
     public Handler handler = new Handler();
     public Plant[] plants1 = new Plant[3];
     public Plant[] plants2 = new Plant[3];
-    public int[] waterObjPos = {0, 159, 318, 477};
+    public Tree[]  trees1  = new Tree[2];
+    public Tree    tree2   = new Tree();
+    public int[]   waterObjPos = {20, 169, 318, 477};
 
     public void OnStart(){
         InitFlog();
@@ -43,43 +35,23 @@ public class CustomView extends View implements Runnable {
         super(context, attrs, defStyle);
     }
 
-    public void UpdatePlants() {
-        InitSurfacesLengths();
-
-        for(int i = 0; i < plants1.length; i++) {
-            plants1[i].x -= 5;
-
-            if(plants1[i].x < -139) {
-                plants1[i].x = getMeasuredWidth();
-                InitSurfacesLengths();
-            }
-        }
-
-        for(int i = 0; i < plants2.length; i ++) {
-            plants2[i].x += 5;
-
-            if(plants2[i].x > getMeasuredWidth()) {
-                plants2[i].x = -139;
-                InitSurfacesLengths();
-            }
-        }
-    }
-
     public void InitSurfaces(){
         for(int i = 0; i < plants1.length; i++) {
             plants1[i] = new Plant();
 
             if(i == 0) {
                 plants1[i].x = 20;
-                plants1[i].y = 20;
+                plants1[i].y = waterObjPos[0];
                 plants1[i].height = plants1[i].y + 139;
                 plants1[i].width  = plants1[i].x + 139;
             }else{
                 plants1[i].x = plants1[i - 1].x + 400;
-                plants1[i].y = 20;
+                plants1[i].y = waterObjPos[0];
                 plants1[i].height = plants1[i].y + 139;
                 plants1[i].width  = plants1[i].x + 139;
             }
+
+            tree2.y = waterObjPos[3];
         }
 
         for(int i = 0; i < plants2.length; i ++) {
@@ -87,16 +59,43 @@ public class CustomView extends View implements Runnable {
 
             if(i == 0) {
                 plants2[i].x = 20;
-                plants2[i].y = 169;
-                plants2[i].height = plants2[i].y + 149;
-                plants2[i].width  = plants2[i].x + 149;
+                plants2[i].y = waterObjPos[1];
+                plants2[i].height = plants2[i].y + 139;
+                plants2[i].width  = plants2[i].x + 139;
             }else{
                 plants2[i].x = plants2[i - 1].x + 400;
-                plants2[i].y = 169;
-                plants2[i].height = plants2[i].y + 199;
-                plants2[i].width  = plants2[i].x + 199;
+                plants2[i].y = waterObjPos[1];
+                plants2[i].height = plants2[i].y + 139;
+                plants2[i].width  = plants2[i].x + 139;
             }
         }
+
+        for(int i = 0; i < trees1.length; i ++) {
+            trees1[i] = new Tree();
+
+            switch (i)
+            {
+                case 0:
+                    trees1[i].x = 20;
+                    trees1[i].y = waterObjPos[2];
+                    trees1[i].width = trees1[i].x + 429;
+                    trees1[i].height = trees1[i].y + 129;
+                    break;
+                default:
+                    trees1[i].x = trees1[i -1].x + 729;
+                    trees1[i].y = waterObjPos[2];
+                    trees1[i].width = trees1[i].x + 429;
+                    trees1[i].height = trees1[i].y + 129;
+                    break;
+            }
+        }
+
+        tree2 = new Tree();
+
+        tree2.x = 450;
+        tree2.y = waterObjPos[3];
+        tree2.width  = tree2.x + 429;
+        tree2.height = tree2.y + 129;
     }
 
     public void InitSurfacesLengths() {
@@ -104,21 +103,35 @@ public class CustomView extends View implements Runnable {
 
             if(i == 0) {
                 plants1[i].height = plants1[i].y + 139;
-                plants1[i].width  = plants1[i].x + 139;
+                plants1[i].width  = plants1[i].x + 159;
             }else{
                 plants1[i].height = plants1[i].y + 139;
-                plants1[i].width  = plants1[i].x + 139;
+                plants1[i].width  = plants1[i].x + 159;
             }
 
 
             if(i == 0) {
                 plants2[i].height = plants2[i].y + 139;
-                plants2[i].width  = plants2[i].x + 139;
+                plants2[i].width  = plants2[i].x + 169;
             }else{
-                plants2[i].height = plants2[i].y + 159;
-                plants2[i].width  = plants2[i].x + 159;
+                plants2[i].height = plants2[i].y + 139;
+                plants2[i].width  = plants2[i].x + 169;
             }
         }
+
+        for(int i = 0; i < trees1.length; i ++) {
+            if(i == 0) {
+                trees1[i].width = trees1[i].x + 429;
+                trees1[i].height = trees1[i].y + 129;
+            }
+            else {
+                trees1[i].width  = trees1[i].x + 429;
+                trees1[i].height = trees1[i].y + 129;
+            }
+        }
+
+        tree2.width  = tree2.x + 429;
+        tree2.height = tree2.y + 129;
     }
 
     public void InitFlog() {
@@ -145,6 +158,44 @@ public class CustomView extends View implements Runnable {
         }
     }
 
+    public void UpdatePlants() {
+
+        for(int i = 0; i < plants1.length; i++) {
+            plants1[i].x -= 5;
+
+            if(plants1[i].x < -159) {
+                plants1[i].x = getMeasuredWidth();
+                InitSurfacesLengths();
+            }
+        }
+
+        for(int i = 0; i < plants2.length; i ++) {
+            plants2[i].x += 5;
+
+            if(plants2[i].x > getMeasuredWidth()) {
+                plants2[i].x = -159;
+                InitSurfacesLengths();
+            }
+        }
+    }
+
+    public void UpdateTrees() {
+        for(int i = 0; i < trees1.length; i ++) {
+            trees1[i].x -= 5;
+
+            if(trees1[i].x < -429) {
+                trees1[i].x = getMeasuredWidth();
+                InitSurfacesLengths();
+            }
+        }
+
+        tree2.x += 10;
+
+        if(tree2.x > getMeasuredWidth() + 429){
+            tree2.x = -429;
+        }
+    }
+
     public void Move(String path){
 
         if(path.equals("left")){
@@ -165,15 +216,13 @@ public class CustomView extends View implements Runnable {
         int x = (int) event.getX();
         int y = (int) event.getY();
 
-        if(x < (getWidth() / 2) - 300)
-        {
+        if(x < (getWidth() / 2) - 300) {
             Move("left");
         }
-        else if(x > (getWidth() / 2) + 300)
-        {
+        else if(x > (getWidth() / 2) + 300) {
             Move("right");
         }
-        else{
+        else {
             Move("up");
         }
 
@@ -185,8 +234,20 @@ public class CustomView extends View implements Runnable {
         super.onDraw(canvas);
         flog.paint.setColor(Color.GREEN);
         water.paint.setColor(Color.BLUE);
+        water.paint.setColor(Color.BLUE);
+        tree2.paint.setColor(Color.RED);
 
-        canvas.drawRect(water.x, water.y, water.width, water.height, water.paint);
+        for(int i = 0; i < plants1.length; i++) {
+            plants1[i].paint.setColor(Color.YELLOW);
+        }
+        for(int i = 0; i < plants2.length; i++) {
+            plants2[i].paint.setColor(Color.YELLOW);
+        }
+        for(int i = 0; i < trees1.length; i++) {
+            trees1[i].paint.setColor(Color.RED);
+        }
+
+            canvas.drawRect(water.x, water.y, water.width, water.height, water.paint);
 
         for(int i = 0; i < plants1.length; i++) {
             canvas.drawRect(plants1[i].x, plants1[i].y, plants1[i].width, plants1[i].height, plants1[i].paint);
@@ -196,6 +257,11 @@ public class CustomView extends View implements Runnable {
             canvas.drawRect(plants2[i].x, plants2[i].y, plants2[i].width, plants2[i].height, plants2[i].paint);
         }
 
+        for(int i = 0; i < trees1.length; i++) {
+            canvas.drawRect(trees1[i].x, trees1[i].y, trees1[i].width, trees1[i].height, trees1[i].paint);
+        }
+
+        canvas.drawRect(tree2.x, tree2.y, tree2.width, tree2.height, tree2.paint);
         canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
 
         Update();
@@ -210,6 +276,8 @@ public class CustomView extends View implements Runnable {
     private void Update() {
         UpdateFlogProprietes();
         UpdatePlants();
+        UpdateTrees();
+        InitSurfacesLengths();
     }
 
     @Override
