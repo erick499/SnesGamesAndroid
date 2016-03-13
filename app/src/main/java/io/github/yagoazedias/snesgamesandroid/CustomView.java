@@ -51,12 +51,21 @@ public class CustomView extends View implements Runnable {
 
             if(plants1[i].x < -139) {
                 plants1[i].x = getMeasuredWidth();
+                InitSurfacesLengths();
+            }
+        }
+
+        for(int i = 0; i < plants2.length; i ++) {
+            plants2[i].x += 5;
+
+            if(plants2[i].x > getMeasuredWidth()) {
+                plants2[i].x = -139;
+                InitSurfacesLengths();
             }
         }
     }
 
     public void InitSurfaces(){
-
         for(int i = 0; i < plants1.length; i++) {
             plants1[i] = new Plant();
 
@@ -72,6 +81,22 @@ public class CustomView extends View implements Runnable {
                 plants1[i].width  = plants1[i].x + 139;
             }
         }
+
+        for(int i = 0; i < plants2.length; i ++) {
+            plants2[i] = new Plant();
+
+            if(i == 0) {
+                plants2[i].x = 20;
+                plants2[i].y = 169;
+                plants2[i].height = plants2[i].y + 149;
+                plants2[i].width  = plants2[i].x + 149;
+            }else{
+                plants2[i].x = plants2[i - 1].x + 400;
+                plants2[i].y = 169;
+                plants2[i].height = plants2[i].y + 199;
+                plants2[i].width  = plants2[i].x + 199;
+            }
+        }
     }
 
     public void InitSurfacesLengths() {
@@ -83,6 +108,15 @@ public class CustomView extends View implements Runnable {
             }else{
                 plants1[i].height = plants1[i].y + 139;
                 plants1[i].width  = plants1[i].x + 139;
+            }
+
+
+            if(i == 0) {
+                plants2[i].height = plants2[i].y + 139;
+                plants2[i].width  = plants2[i].x + 139;
+            }else{
+                plants2[i].height = plants2[i].y + 159;
+                plants2[i].width  = plants2[i].x + 159;
             }
         }
     }
@@ -156,6 +190,10 @@ public class CustomView extends View implements Runnable {
 
         for(int i = 0; i < plants1.length; i++) {
             canvas.drawRect(plants1[i].x, plants1[i].y, plants1[i].width, plants1[i].height, plants1[i].paint);
+        }
+
+        for(int i = 0; i < plants2.length; i++) {
+            canvas.drawRect(plants2[i].x, plants2[i].y, plants2[i].width, plants2[i].height, plants2[i].paint);
         }
 
         canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
