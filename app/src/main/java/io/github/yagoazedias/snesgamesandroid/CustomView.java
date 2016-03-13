@@ -22,7 +22,8 @@ public class CustomView extends View implements Runnable {
     public Flog flog   = new Flog();
     public Water water = new Water();
     public Handler handler = new Handler();
-    public List<Plant> plants;
+    public Plant[] plants1 = new Plant[3];
+    public Plant[] plants2 = new Plant[3];
     public int[] waterObjPos = {0, 159, 318, 477};
 
     public void OnStart(){
@@ -42,14 +43,53 @@ public class CustomView extends View implements Runnable {
         super(context, attrs, defStyle);
     }
 
+    public void UpdatePlants() {
+        InitSurfacesLengths();
+
+        for(int i = 0; i < plants1.length; i++) {
+            plants1[i].x -= 5;
+
+            if(plants1[i].x < -139) {
+                plants1[i].x = getMeasuredWidth();
+            }
+        }
+    }
+
     public void InitSurfaces(){
-        plants[0].x = 0;
-        plants[0].y = waterObjPos[0];
+
+        for(int i = 0; i < plants1.length; i++) {
+            plants1[i] = new Plant();
+
+            if(i == 0) {
+                plants1[i].x = 20;
+                plants1[i].y = 20;
+                plants1[i].height = plants1[i].y + 139;
+                plants1[i].width  = plants1[i].x + 139;
+            }else{
+                plants1[i].x = plants1[i - 1].x + 400;
+                plants1[i].y = 20;
+                plants1[i].height = plants1[i].y + 139;
+                plants1[i].width  = plants1[i].x + 139;
+            }
+        }
+    }
+
+    public void InitSurfacesLengths() {
+        for(int i = 0; i < plants1.length; i++) {
+
+            if(i == 0) {
+                plants1[i].height = plants1[i].y + 139;
+                plants1[i].width  = plants1[i].x + 139;
+            }else{
+                plants1[i].height = plants1[i].y + 139;
+                plants1[i].width  = plants1[i].x + 139;
+            }
+        }
     }
 
     public void InitFlog() {
-        flog.x = 450;
-        flog.y = getMeasuredHeight() - ((getMeasuredHeight() / 11) / 2);
+        //flog.x = 450;
+        flog.y = 1749 - ((1749 / 11) / 2);
 
         System.out.println(getMeasuredWidth());
 
@@ -66,8 +106,7 @@ public class CustomView extends View implements Runnable {
         flog.width  = flog.x + 100;
         flog.height = flog.y + 50;
 
-        if(flog.y < 0)
-        {
+        if(flog.y < 0) {
             InitFlog();
         }
     }
@@ -112,10 +151,13 @@ public class CustomView extends View implements Runnable {
         super.onDraw(canvas);
         flog.paint.setColor(Color.GREEN);
         water.paint.setColor(Color.BLUE);
-        plants[0].paint.setColor(Color.GREEN);
 
         canvas.drawRect(water.x, water.y, water.width, water.height, water.paint);
-        canvas.drawRect(plants[0].x, plants[0].y, plants[0].width, plants[0].height, plants[0].paint);
+
+        for(int i = 0; i < plants1.length; i++) {
+            canvas.drawRect(plants1[i].x, plants1[i].y, plants1[i].width, plants1[i].height, plants1[i].paint);
+        }
+
         canvas.drawRect(flog.x, flog.y, flog.width, flog.height, flog.paint);
 
         Update();
@@ -129,7 +171,7 @@ public class CustomView extends View implements Runnable {
 
     private void Update() {
         UpdateFlogProprietes();
-        System.out.println(getMeasuredWidth());
+        UpdatePlants();
     }
 
     @Override
