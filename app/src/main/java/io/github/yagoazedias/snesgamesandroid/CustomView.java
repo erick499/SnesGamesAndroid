@@ -323,7 +323,10 @@ public class CustomView extends View implements Runnable {
     public void InitFlog() {
         //flog.x = 450;
         line = 10;
+        flog.x = 450;
         flog.y = PlayerPos[line];
+
+        flog.state = "Safe";
 
         flog.width  = flog.x + 100;
         flog.height = flog.y + 100;
@@ -344,6 +347,10 @@ public class CustomView extends View implements Runnable {
             InitFlog();
         }
 
+        if(flog.x < 0 || flog.x > getMeasuredWidth()) {
+            InitFlog();
+        }
+
         if(flog.state.equals("Safe")) {
             switch (line) {
                 case 4:
@@ -360,7 +367,8 @@ public class CustomView extends View implements Runnable {
                     break;
             }
         }
-        else if(flog.state.equals("InMercer")) {
+        else if(flog.state.equals("InMercer") && line < 5) {
+            flog.state = "Safe";
             InitFlog();
         }
 
