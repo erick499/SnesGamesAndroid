@@ -58,11 +58,32 @@ public class CustomView extends View implements Runnable {
                             || ((flog.x >= plants1[0].x) && (flog.x <= plants1[0].x + 139)) && (line == 1)
                             || ((flog.x >= plants1[1].x) && (flog.x <= plants1[1].x + 139)) && (line == 1)
                             || ((flog.x >= plants1[2].x) && (flog.x <= plants1[2].x + 139)) && (line == 1)) {
-                        System.out.println("State: " + flog.state + ", in the line: " + line);
                         flog.state = "Safe";
                     } else if((line < 5)) {
                         System.out.println("State: " + flog.state);
                         flog.state = "InMercer";
+                    }
+                }
+                else {
+                    if(((flog.x > carsLine1[0].x - 100 && flog.x < carsLine1[0].x + 229)
+                            || (flog.x > carsLine1[1].x - 100 && flog.x < carsLine1[1].x + 229)) && line == 5) {
+                       InitFlog();
+                    }
+                    if(((flog.x > carsLine2[0].x - 100 && flog.x < carsLine2[0].x + 229)
+                            || (flog.x > carsLine2[1].x - 100 && flog.x < carsLine2[1].x + 229)) && line == 6) {
+                        InitFlog();
+                    }
+                    if(((flog.x > carsLine3[0].x - 100 && flog.x < carsLine3[0].x + 229)
+                            || (flog.x > carsLine3[1].x - 100 && flog.x < carsLine3[1].x + 229)) && line == 7) {
+                        InitFlog();
+                    }
+                    if(((flog.x > carsLine4[0].x - 100 && flog.x < carsLine4[0].x + 229)
+                            || (flog.x > carsLine4[1].x - 100 && flog.x < carsLine4[1].x + 229)) && line == 8) {
+                        InitFlog();
+                    }
+                    if(((flog.x > carsLine5[0].x - 100 && flog.x < carsLine5[0].x + 229)
+                            || (flog.x > carsLine5[1].x - 100 && flog.x < carsLine5[1].x + 229)) && line == 9) {
+                        InitFlog();
                     }
                 }
             }
