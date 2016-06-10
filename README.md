@@ -10,6 +10,3 @@ A repostitory when you will find some snes games in the android device.
 ## Credits
 - [Yago Azedias](https://github.com/yagoazedias/)
 - Email: yagoazedias@gmail.com
-
-## Copyright
-- You are freedom to use this project for all you plans, i only ask that the credits.
