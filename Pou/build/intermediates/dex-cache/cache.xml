@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/home/yagoazedias/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-eb95c7a74c7710fbb9773a2d99fed7ee375af46f.jar" />
-    </item>
-    <item
-        jar="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jar="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-915f95f5acafd001b0102cbdc99efb1853633c4a.jar" />
+        <dex dex="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-2b5b1ba77fcbb2d5f2111fdbf8220f1171b5eaa9.jar" />
     </item>
     <item
-        jar="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jar="C:\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/pre-dexed/debug/classes-9257d226808793b8c2294eaefeb8567121c4aa8f.jar" />
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-83ac548117bb948ad8a14d323618a84860c21634.jar" />
     </item>
     <item
-        jar="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jar="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/home/yagoazedias/Documentos/github/SnesGamesAndroid/Pou/app/build/intermediates/pre-dexed/debug/classes-b72c9bc9a8bb16f1d399a29944b9619c754d57ac.jar" />
+        <dex dex="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\pre-dexed\debug\classes-6863f60c0e1a5e2ba724e2d6e7ddaef9bf74a9eb.jar" />
+    </item>
+    <item
+        jar="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\Users\erick.oliveira\Desktop\GitHub\SnesGamesAndroid\Pou\app\build\intermediates\pre-dexed\debug\classes-90278423ff5438e9ebba9b89e47c9c763e72a6b7.jar" />
     </item>
 
 </items>
