@@ -20,11 +20,11 @@ public class CustomView extends View implements Runnable {
     float ypad = (float)(getPaddingTop() + getPaddingBottom()) + 1300;
     float screenW;
     float screenH;
-
     float xplayer;
     float yplayer;
 
     int canAnim = 2;
+    boolean pulo = false;
 
     // Water properties.
     //Rect water = new Rect((int)screenW/12, (int)screenH/3, (int)screenW, (int)screenH);
@@ -44,63 +44,86 @@ public class CustomView extends View implements Runnable {
         }
     }
 
+
     public CustomView(Context context) {
         super(context);
         screenW = context.getResources().getDisplayMetrics().widthPixels;
         screenH = context.getResources().getDisplayMetrics().heightPixels;
+        xplayer  = screenW/11;
+        yplayer = screenH/2;
     }
 
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
         screenW = context.getResources().getDisplayMetrics().widthPixels;
         screenH = context.getResources().getDisplayMetrics().heightPixels;
+        xplayer  = screenW/11;
+        yplayer = screenH/2;
     }
 
     public CustomView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         screenW = context.getResources().getDisplayMetrics().widthPixels;
         screenH = context.getResources().getDisplayMetrics().heightPixels;
+        xplayer  = screenW/11;
+        yplayer = screenH/2;
     }
 
     public void pouAnim() {
 
-        if(canAnim == 0) {
-            yplayer -= screenH/20;
+        if(pulo){
+        while(yplayer <= screenH/4){
+
+            yplayer++;
+
+        }
+        pulo = false;
+        }
+
+        if(pulo != true){
+            while(yplayer <= screenH/2){
+
+                yplayer--;
+
+            }
+
+        }
+
+       // if(canAnim == 0) {
+            //yplayer -= 20;
 
             //for(int i = 0; i < board.length; i++) {
               //  board[i].xpad -= 60;
             //}
 
-        }
+     //   }
 
-        if(canAnim == 1) {
-            yplayer += screenH/20;
-        }
+      //  if(canAnim == 1) {
+         //  yplayer += 20;
+      //  }
 
-        if(ypad <= (getPaddingTop() + getPaddingBottom()) + 1000) {
-            canAnim = 1;
-        }
+      //  if(ypad <= screenH/2) {
+        //    canAnim = 1;
+      //  }
 
-        if(ypad >= (getPaddingTop() + getPaddingBottom()) + 1300) {
-            canAnim = 2;
-        }
+        //if(ypad >= screenH/3) {
+           // canAnim = 2;
+       // }
 
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-        if(canAnim == 2) {
-            canAnim = 0;
-            System.out.println("CanAnim: " + canAnim);
-            System.out.println(ypad);
-        }
+       // if(canAnim == 2) {
+            //canAnim = 0;
+            //System.out.println("CanAnim: " + canAnim);
+            //System.out.println(ypad);
+        //}
+        pulo = true;
         return super.onTouchEvent(event);
     }
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        xplayer = screenW/11;
-        yplayer = screenH/2;
 
         canvas.drawCircle(xplayer, yplayer, 100, new Paint(Paint.ANTI_ALIAS_FLAG));
         //canvas.drawRect(screenW/30,screenH ,screenW,screenH+1, new Paint(Paint.DEV_KERN_TEXT_FLAG));
